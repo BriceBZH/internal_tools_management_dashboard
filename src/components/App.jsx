@@ -3,32 +3,27 @@ import reactLogo from '../assets/images/react.svg'
 import viteLogo from '/vite.svg'
 import '../styles/App.css'
 
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Dashboard from '../pages/Dashboard'
+import Tools from '../pages/Tools'
+import Analytics from '../pages/Analytics'
+import Settings from '../pages/Settings'
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div class="bg-black text-white">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/tools" element={<Tools />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </BrowserRouter>
       </div>
-      <h1>Vite + React</h1>
-      <button class="bg-black text-white p-10 rounded">Click me</button>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
