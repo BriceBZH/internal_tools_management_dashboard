@@ -3,7 +3,7 @@ import Logo from '../assets/images/logo.png';
 
 function Header() {
     return (
-        <div class="flex flex-row">
+        <div className="flex flex-row">
             <a>
                 <img src={Logo} alt="Logo" />
             </a>

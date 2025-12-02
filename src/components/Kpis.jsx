@@ -1,21 +1,39 @@
+import { useEffect, useState } from "react";
+
 function Kpis() {
+    const [kpis, setKpis] = useState([]);
+        useEffect(() => {
+            fetch("https://tt-jsonserver-01.alt-tools.tech/analytics")
+            .then((response) => response.json())
+            .then((data) => {
+                setKpis(data);
+                console.log(data); 
+            })
+            .catch((err) => {
+                console.error("Erreur fetching Recent tools:", err);   
+            });
+        }, []);
     return (
-        <ul class="flex flex-row">
-            <li class="border rounded-xs border-solid border-white p-3">
+        <ul className="flex flex-row p-3">
+            <li className="border rounded-xl border-solid border-white p-3">
                 <h4>Monthly Budget</h4>
-                <p>plop</p>
+                {/* <p>{kpis.budget_overview.current_month_total}/{kpis.budget_overview.monthly_limit}</p> */}
+                {/* <p>{kpis.kpi_trends.budget_change}</p> */}
             </li>
-            <li class="border rounded-xs border-solid border-white p-3">
+            <li className="border rounded-xl border-solid border-white p-3">
                 <h4>Active Tools</h4>
                 <p>plop</p>
+                {/* <p>{kpis.kpi_trends.tools_change}</p> */}
             </li>
-            <li class="border rounded-xs border-solid border-white p-3">
+            <li className="border rounded-xl border-solid border-white p-3">
                 <h4>Departments</h4>
-                <p>plop</p>
+                {/* <p>{kpis.}</p> */}
+                {/* <p>{kpis.kpi_trends.departments_change}</p> */}
             </li>
-            <li class="border rounded-xs border-solid border-white p-3">
+            <li className="border rounded-xl border-solid border-white p-3">
                 <h4>Cost/User</h4>
-                <p>plop</p>
+                {/* <p>{kpis.cost_analytics.cost_per_user}</p>
+                <p>{kpis.kpi_trends.cost_per_user_change}</p> */}
             </li>
         </ul>
     )
