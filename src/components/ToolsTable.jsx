@@ -22,7 +22,7 @@ function ToolsTable({tools, filterChange, search}) {
         (!filters.status || tool.status === filters.status) &&
         (!filters.department || tool.owner_department === filters.department) &&
         (!filters.cost || tool.monthly_cost <= filters.cost) && 
-        (!search || tool.owner_department === search || tool.name === search || tool.description === search || tool.vendor === search || tool.category === search)
+        (!search || tool.owner_department.toLowerCase().includes(search.toLowerCase()) || tool.name.toLowerCase().includes(search.toLowerCase()) || tool.description.toLowerCase().includes(search.toLowerCase()) || tool.vendor.toLowerCase().includes(search.toLowerCase()) || tool.category.toLowerCase().includes(search.toLowerCase()))
     )
     return (
         <div className="border border-solid border-[#191919] p-6 rounded-xl">

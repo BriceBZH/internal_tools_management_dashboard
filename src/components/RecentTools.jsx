@@ -38,7 +38,7 @@ function RecentTools({search}) {
                 <tbody>
                     {
                         recentTools
-                        .filter(tool => !search || tool.owner_department === search || tool.name === search)
+                        .filter(tool => !search || tool.owner_department.toLowerCase().includes(search.toLowerCase()) || tool.name.toLowerCase().includes(search.toLowerCase()))
                         .sort((a, b) => {
                             let valA = a[sortColumn];
                             let valB = b[sortColumn];
