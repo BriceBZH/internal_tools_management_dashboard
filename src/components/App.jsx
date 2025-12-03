@@ -3,7 +3,7 @@ import reactLogo from '../assets/images/react.svg'
 import viteLogo from '/vite.svg'
 import '../styles/App.css'
 import Header from '../components/Header'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard'
 import Tools from '../pages/Tools'
 import Analytics from '../pages/Analytics'
