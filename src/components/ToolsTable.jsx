@@ -1,15 +1,13 @@
 import ToolsFilters from '../components/ToolsFilters'
 import { useEffect, useState } from "react";
+import { format } from "date-fns";
 
-function ToolsTable({tools, filterChange}) {
+function ToolsTable({tools, filterChange, search}) {
     const colors = {
         active: "bg-green-400",
         unused: "bg-red-500",
         expiring: "bg-orange-300"
     };
-    function filterChange(field, value) {
-        console.log(field+' '+value);
-    }
     const [filters, setFilters] = useState({
         status: "",
         category: "",
@@ -19,6 +17,7 @@ function ToolsTable({tools, filterChange}) {
     function filterChange(field, value) {
         setFilters(prev => ({ ...prev, [field]: value }));
     }
+    console.log(search)
     return (
         <div className="border border-solid border-[#191919] p-6 rounded-xl">
             <h3>Tools</h3>
@@ -45,10 +44,11 @@ function ToolsTable({tools, filterChange}) {
                         (!filters.category || tool.category === filters.category) &&
                         (!filters.status || tool.status === filters.status) &&
                         (!filters.department || tool.owner_department === filters.department) &&
-                        (!filters.cost || tool.monthly_cost <= filters.cost)
+                        (!filters.cost || tool.monthly_cost <= filters.cost) &&
+                        (!search || tool.owner_department === search || tool.name === search || tool.description === search || tool.vendor === search || tool.category === search)
                     )
                     .map((tool, index) => 
-                        <tr key={index} className="border-b border-[#191919]">
+                        <tr key={index} className="border-b border-[#191919] hover:bg-neutral-400">
                             <td className="p-3">{tool.name}</td>
                             <td className="p-3">{tool.description}</td>
                             <td className="p-3">{tool.vendor}</td>
@@ -60,9 +60,11 @@ function ToolsTable({tools, filterChange}) {
                                     {tool.status}
                                 </span>
                             </td>
-                            <td className="p-3">{tool.updated_at}</td>
                             <td className="p-3">
-                                <select onchange=''>
+                                { tool.updated_at? format(new Date(tool.updated_at), "dd/MM/yyyy HH:mm") : "—" } 
+                            </td>
+                            <td className="p-3">
+                                <select className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => action(tool.id, e.target.value)}>
                                     <option value="">Action</option>
                                     <option value="view">View</option>
                                     <option value="edit">Edit</option>

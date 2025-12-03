@@ -3,7 +3,7 @@ import Notifications from './Notifications'
 import SearchBar from './SearchBar'
 import Logo from '../assets/images/logo.png';
 
-function Header() {
+function Header({handleSearch}) {
     return (
         <div className="flex border-b border-[#191919] w-full">
             <div className="flex items-center justify-start w-1/2 gap-4">
@@ -13,7 +13,7 @@ function Header() {
                 <Navbar />
             </div>
             <div className="flex items-center justify-end w-1/2 gap-4">
-                <SearchBar />
+                <SearchBar handleSearch={handleSearch}/>
                 <Notifications />
             </div>
         </div>
