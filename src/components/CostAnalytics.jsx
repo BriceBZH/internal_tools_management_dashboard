@@ -49,7 +49,11 @@ function CostAnalytics() {
     return (
         <div className="p-4 border border-[#191919] rounded-xl bg-black">
             <h4 className="text-gray-400 mb-2">Department Cost Breakdown</h4>
-            <Pie data={chartData} />
+            {chartData ? (
+                <Pie data={chartData} />
+            ) : (
+                <div className="text-gray-500">Loading chart...</div>
+            )}
         </div>
     );
 }

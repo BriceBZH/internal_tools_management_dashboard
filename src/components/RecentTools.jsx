@@ -36,40 +36,42 @@ function RecentTools({search}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {recentTools
-                    .filter(tool => !search || tool.owner_department === search || tool.name === search)
-                    .sort((a, b) => {
-                        let valA = a[sortColumn];
-                        let valB = b[sortColumn];
+                    {
+                        recentTools
+                        .filter(tool => !search || tool.owner_department === search || tool.name === search)
+                        .sort((a, b) => {
+                            let valA = a[sortColumn];
+                            let valB = b[sortColumn];
 
-                        if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
-                        if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
-                        return 0;
-                    })
-                    .map((tool, index) => 
-                        <tr key={index} className="border-b border-[#191919] hover:bg-neutral-400">
-                            <td className="p-3">
-                                <img src={tool.icon_url} alt={tool.name + " icon"} style={{ width: 20, height: 20 }} />
-                                {tool.name}
-                            </td>
-                            <td className="p-3">{tool.owner_department}</td>
-                            <td className="p-3">{tool.active_users_count}</td>
-                            <td className="p-3">{tool.monthly_cost}</td>
-                            <td className="p-3">
-                                <span className={`py-1 px-1 text-xs rounded-md ${colors[tool.status]}`}>
-                                    {tool.status}
-                                </span>
-                            </td>
-                            <td className="p-3">
-                                <select className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => action(tool.id, e.target.value)}>
-                                    <option value="">Action</option>
-                                    <option value="view">View</option>
-                                    <option value="edit">Edit</option>
-                                    <option value="delete">Delete</option>
-                                </select>
-                            </td>
-                        </tr>
-                    )}
+                            if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
+                            if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
+                            return 0;
+                        })
+                        .map((tool, index) => 
+                            <tr key={index} className="border-b border-[#191919] hover:bg-neutral-400">
+                                <td className="p-3">
+                                    <img src={tool.icon_url} alt={tool.name + " icon"} style={{ width: 20, height: 20 }} />
+                                    {tool.name}
+                                </td>
+                                <td className="p-3">{tool.owner_department}</td>
+                                <td className="p-3">{tool.active_users_count}</td>
+                                <td className="p-3">{tool.monthly_cost}</td>
+                                <td className="p-3">
+                                    <span className={`py-1 px-1 text-xs rounded-md ${colors[tool.status]}`}>
+                                        {tool.status}
+                                    </span>
+                                </td>
+                                <td className="p-3">
+                                    <select className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => action(tool.id, e.target.value)}>
+                                        <option value="">Action</option>
+                                        <option value="view">View</option>
+                                        <option value="edit">Edit</option>
+                                        <option value="delete">Delete</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        )
+                    }
                 </tbody>
             </table>
         </div>
