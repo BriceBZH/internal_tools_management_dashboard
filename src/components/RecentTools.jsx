@@ -13,6 +13,11 @@ function RecentTools() {
             console.error("Erreur fetching Recent tools:", err);   
         });
     }, []);
+    const colors = {
+        active: "bg-green-400",
+        unused: "bg-red-500",
+        expiring: "bg-orange-300"
+    };
     return (
         <div className="border border-solid border-[#191919] p-6 rounded-xl">
             <h3>Recent Tools</h3>
@@ -33,7 +38,11 @@ function RecentTools() {
                             <td className="p-3">{tool.owner_department}</td>
                             <td className="p-3">{tool.active_users_count}</td>
                             <td className="p-3">{tool.monthly_cost}</td>
-                            <td className="p-3">{tool.status}</td>
+                            <td className="p-3">
+                                <span className={`py-1 px-1 text-xs rounded-md ${colors[tool.status]}`}>
+                                    {tool.status}
+                                </span>
+                            </td>
                         </tr>
                     )}
                 </tbody>

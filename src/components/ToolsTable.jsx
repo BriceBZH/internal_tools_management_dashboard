@@ -2,6 +2,11 @@ import ToolsFilters from '../components/ToolsFilters'
 import { useEffect, useState } from "react";
 
 function ToolsTable({tools, filterChange}) {
+    const colors = {
+        active: "bg-green-400",
+        unused: "bg-red-500",
+        expiring: "bg-orange-300"
+    };
     function filterChange(field, value) {
         console.log(field+' '+value);
     }
@@ -50,10 +55,19 @@ function ToolsTable({tools, filterChange}) {
                             <td className="p-3">{tool.category}</td>
                             <td className="p-3">{tool.monthly_cost}</td>
                             <td className="p-3">{tool.owner_department}</td>
-                            <td className="p-3">{tool.status}</td>
+                            <td className="p-3"> 
+                                <span className={`py-1 px-1 text-xs rounded-md ${colors[tool.status]}`}>
+                                    {tool.status}
+                                </span>
+                            </td>
                             <td className="p-3">{tool.updated_at}</td>
                             <td className="p-3">
-                                
+                                <select onchange=''>
+                                    <option value="">Action</option>
+                                    <option value="view">View</option>
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
                             </td>
                         </tr>
                     )}
