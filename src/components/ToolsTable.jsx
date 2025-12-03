@@ -1,8 +1,26 @@
-function ToolsTable({tools}) {
+import ToolsFilters from '../components/ToolsFilters'
+import { useEffect, useState } from "react";
+
+function ToolsTable({tools, filterChange}) {
+    function filterChange(field, value) {
+        console.log(field+' '+value);
+    }
+    const [filters, setFilters] = useState({
+        status: "",
+        category: "",
+        department: "",
+        cost: ""
+    });
+    function filterChange(field, value) {
+        setFilters(prev => ({ ...prev, [field]: value }));
+    }
     return (
         <div className="border border-solid border-[#191919] p-6 rounded-xl">
             <h3>Tools</h3>
-            <table className="w-full border-collapse  text-center"> 
+            <div className="p-3">
+                <ToolsFilters filterChange={filterChange} filters={filters} />
+            </div>
+            <table className="w-full border-collapse text-center"> 
                 <thead>
                     <tr className="border-b border-[#191919]">
                         <th className="p-3">Tool</th>
@@ -17,7 +35,14 @@ function ToolsTable({tools}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {tools.map((tool, index) => 
+                    {tools
+                    .filter(tool =>
+                        (!filters.category || tool.category === filters.category) &&
+                        (!filters.status || tool.status === filters.status) &&
+                        (!filters.department || tool.owner_department === filters.department) &&
+                        (!filters.cost || tool.monthly_cost <= filters.cost)
+                    )
+                    .map((tool, index) => 
                         <tr key={index} className="border-b border-[#191919]">
                             <td className="p-3">{tool.name}</td>
                             <td className="p-3">{tool.description}</td>
