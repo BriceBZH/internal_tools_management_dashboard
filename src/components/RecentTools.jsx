@@ -14,26 +14,26 @@ function RecentTools() {
         });
     }, []);
     return (
-        <div className="border border-solid border-white">
-            <h3 >Recent Tools</h3>
-            <table className="border-collapse"> 
+        <div className="border border-solid border-[#191919] p-6 rounded-xl">
+            <h3>Recent Tools</h3>
+            <table className="w-full border-collapse  text-center"> 
                 <thead>
-                    <tr>
-                        <th>Tool</th>
-                        <th>Department</th>
-                        <th>Users</th>
-                        <th>Monthly Cost</th>
-                        <th>Status</th>
+                    <tr className="border-b border-[#191919]">
+                        <th className="p-3">Tool</th>
+                        <th className="p-3">Department</th>
+                        <th className="p-3">Users</th>
+                        <th className="p-3">Monthly Cost</th>
+                        <th className="p-3">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {recentTools.map((tool, index) => 
-                        <tr key={index}>
-                            <td className="font-inter">{tool.name}</td>
-                            <td>{tool.owner_department}</td>
-                            <td>{tool.active_users_count}</td>
-                            <td>{tool.monthly_cost}</td>
-                            <td>{tool.status}</td>
+                        <tr key={index} className="border-b border-[#191919]">
+                            <td className="p-3">{tool.name}</td>
+                            <td className="p-3">{tool.owner_department}</td>
+                            <td className="p-3">{tool.active_users_count}</td>
+                            <td className="p-3">{tool.monthly_cost}</td>
+                            <td className="p-3">{tool.status}</td>
                         </tr>
                     )}
                 </tbody>

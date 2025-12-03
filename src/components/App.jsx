@@ -14,16 +14,19 @@ function App() {
 
   return (
     <>
-      <div className="bg-black text-white min-h-screen">
-        <BrowserRouter>
-        <Header />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/tools" element={<Tools />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
-        </BrowserRouter>
+      <div className="bg-[#212121] min-h-screen flex justify-center">
+        {/* <div className="bg-black text-white w-[60vw] h-[100vh] p-4"> */}
+          <div className="bg-black text-white w-[100vw] h-[100vh] p-4">
+          <BrowserRouter>
+          <Header />
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/tools" element={<Tools />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/settings" element={<Settings />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
       </div>
     </>
   )
