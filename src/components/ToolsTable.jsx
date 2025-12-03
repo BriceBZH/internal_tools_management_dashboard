@@ -17,7 +17,13 @@ function ToolsTable({tools, filterChange, search}) {
     function filterChange(field, value) {
         setFilters(prev => ({ ...prev, [field]: value }));
     }
-    console.log(search)
+    const filteredTools = tools.filter(tool =>
+        (!filters.category || tool.category === filters.category) &&
+        (!filters.status || tool.status === filters.status) &&
+        (!filters.department || tool.owner_department === filters.department) &&
+        (!filters.cost || tool.monthly_cost <= filters.cost) && 
+        (!search || tool.owner_department === search || tool.name === search || tool.description === search || tool.vendor === search || tool.category === search)
+    )
     return (
         <div className="border border-solid border-[#191919] p-6 rounded-xl">
             <h3>Tools</h3>
@@ -39,17 +45,17 @@ function ToolsTable({tools, filterChange, search}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {tools
-                    .filter(tool =>
-                        (!filters.category || tool.category === filters.category) &&
-                        (!filters.status || tool.status === filters.status) &&
-                        (!filters.department || tool.owner_department === filters.department) &&
-                        (!filters.cost || tool.monthly_cost <= filters.cost) &&
-                        (!search || tool.owner_department === search || tool.name === search || tool.description === search || tool.vendor === search || tool.category === search)
-                    )
+                    {filteredTools.length === 0 ? (
+                        <tr className="border-b border-[#191919] hover:bg-neutral-400">
+                            <td colspan="9">No results</td>
+                        </tr>
+                    ) : (filteredTools
                     .map((tool, index) => 
                         <tr key={index} className="border-b border-[#191919] hover:bg-neutral-400">
-                            <td className="p-3">{tool.name}</td>
+                            <td className="p-3">
+                                <img src={tool.icon_url} alt={tool.name + " icon"} style={{ width: 20, height: 20 }} />
+                                {tool.name}
+                            </td>
                             <td className="p-3">{tool.description}</td>
                             <td className="p-3">{tool.vendor}</td>
                             <td className="p-3">{tool.category}</td>
@@ -72,7 +78,7 @@ function ToolsTable({tools, filterChange, search}) {
                                 </select>
                             </td>
                         </tr>
-                    )}
+                    ))}
                 </tbody>
             </table>
         </div>

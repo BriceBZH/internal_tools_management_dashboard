@@ -10,9 +10,10 @@ import Analytics from '../pages/Analytics'
 import Settings from '../pages/Settings'
 
 function App() {
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState();
   function handleSearch(searchValue) {
-    setSearch(searchValue);
+    const clean = searchValue.replace(/<[^>]*>?/gm, '').trim();
+    setSearch(clean);
   }
   return (
     <>

@@ -7,7 +7,7 @@ function Kpis() {
             .then((response) => response.json())
             .then((data) => {
                 setKpis(data);
-                console.log(data); 
+                // console.log(data); 
             })
             .catch((err) => {
                 console.error("Erreur fetching Recent tools:", err);   

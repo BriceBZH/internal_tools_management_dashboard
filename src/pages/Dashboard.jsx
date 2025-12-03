@@ -2,7 +2,6 @@ import RecentTools from '../components/RecentTools'
 import Kpis from '../components/Kpis'
 
 function Dashboard({search}) {
-    console.log(search)
     return (
         <div className="p-6">
             <h1 className="font-inter">Internal Tools Dashboard</h1>
