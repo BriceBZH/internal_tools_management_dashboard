@@ -19,7 +19,7 @@ function App() {
     <>
       <div className="bg-[#212121] min-h-screen flex justify-center">
         {/* <div className="bg-black text-white w-[60vw] h-[100vh] p-4"> */}
-          <div className="bg-black text-white w-[100vw] h-[100vh] p-4">
+          <div className="bg-black text-white p-4">
           <BrowserRouter>
           <Header handleSearch={handleSearch}/>
             <Routes>

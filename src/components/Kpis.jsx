@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 
 function Kpis() {
     const [kpis, setKpis] = useState([]);
-        useEffect(() => {
-            fetch("https://tt-jsonserver-01.alt-tools.tech/analytics")
-            .then((response) => response.json())
-            .then((data) => {
-                setKpis(data);
-                // console.log(data); 
-            })
-            .catch((err) => {
-                console.error("Erreur fetching Recent tools:", err);   
-            });
-        }, []);
+    useEffect(() => {
+        fetch("https://tt-jsonserver-01.alt-tools.tech/analytics")
+        .then((response) => response.json())
+        .then((data) => {
+            setKpis(data);
+            // console.log(data); 
+        })
+        .catch((err) => {
+            console.error("Erreur fetching Recent tools:", err);   
+        });
+    }, []);
     return (
         <ul className="flex flex-row gap-3 mb-6 mt-6 w-full">
             <li className="flex-1  border rounded-xl border-solid border-[#191919] p-3 min-h-30">

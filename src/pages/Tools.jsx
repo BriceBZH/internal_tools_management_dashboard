@@ -13,15 +13,11 @@ function Tools({search}) {
             console.error("Erreur fetching tools:", err);   
         });
     }, []);
-
-    // function filterChange(field, value) {
-    //     console.log(field+' '+value);
-    // }
     return (
         <div className="p-6">
             <h1 className="font-inter">Internal Tools Dashboard</h1>
             <p>Monitor and manage your organization's software tools and expenses</p>
-            <ToolsTable tools={tools} search={search} />{/*filterChange={filterChange}*/ }
+            <ToolsTable tools={tools} search={search} />
         </div>
     )
 }

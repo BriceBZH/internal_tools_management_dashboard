@@ -47,7 +47,7 @@ function ToolsTable({tools, filterChange, search}) {
                 <tbody>
                     {filteredTools.length === 0 ? (
                         <tr className="border-b border-[#191919] hover:bg-neutral-400">
-                            <td colspan="9">No results</td>
+                            <td colSpan="9">No results</td>
                         </tr>
                     ) : (filteredTools
                     .map((tool, index) => 
