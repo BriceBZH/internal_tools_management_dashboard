@@ -16,7 +16,7 @@ function ToolsFilters({filterChange, filters}) {
     return (
         <div className="flex gap-6">
             {/* Department */}
-            <label for="department">Department</label>
+            <label htmlFor="department">Department</label>
             <select id="department" value={filters.department} className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => filterChange("department", e.target.value)}>
                 <option value ="">All department</option>
                 {departments.map((department, index) => 
@@ -24,7 +24,7 @@ function ToolsFilters({filterChange, filters}) {
                 )}
             </select>
             {/* Status */}
-            <label for="status">Status</label>
+            <label htmlFor="status">Status</label>
             <select id="status" value={filters.status} className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => filterChange("status", e.target.value)}>
                 <option value ="">All status</option>
                 <option value ="active">active</option>
@@ -32,7 +32,7 @@ function ToolsFilters({filterChange, filters}) {
                 <option value ="expiring">expiring</option>
             </select>
             {/* Category */}
-            <label for="category">Category</label>
+            <label htmlFor="category">Category</label>
             <select id="category" value={filters.category} className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => filterChange("category", e.target.value)}>
                 <option value ="">All category</option>
                 <option value ="Communication">Communication</option>
@@ -48,7 +48,7 @@ function ToolsFilters({filterChange, filters}) {
                 <option value ="communication">communication</option>
             </select>
             {/* Cost */}
-            <label for="cost">Cost: {filters.cost}</label>
+            <label htmlFor="cost">Cost: {filters.cost}</label>
             <input type="range" id="cost" name="volume" min="0" max="3000" onChange={(e) => filterChange("cost", e.target.value)}/>
         </div>
     )

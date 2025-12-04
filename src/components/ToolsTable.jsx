@@ -1,8 +1,12 @@
 import ToolsFilters from '../components/ToolsFilters'
+import Modals from '../components/Modals'
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 
 function ToolsTable({tools, filterChange, search}) {
+    const [modal, setModal] = useState(false);
+    const [modalAction, setModalAction] = useState();
+    const [modalContent, setModalContent] = useState([]);
     const colors = {
         active: "bg-green-400",
         unused: "bg-red-500",
@@ -24,11 +28,48 @@ function ToolsTable({tools, filterChange, search}) {
         (!filters.cost || tool.monthly_cost <= filters.cost) && 
         (!search || tool.owner_department.toLowerCase().includes(search.toLowerCase()) || tool.name.toLowerCase().includes(search.toLowerCase()) || tool.description.toLowerCase().includes(search.toLowerCase()) || tool.vendor.toLowerCase().includes(search.toLowerCase()) || tool.category.toLowerCase().includes(search.toLowerCase()))
     )
+    function handleModal(etat) {
+        setModal(etat);
+    }
+    function handleAction(id, actionType) {
+        if (actionType === "delete") {
+            fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${id}`, {
+                method: "DELETE",
+            })
+            .then(() => {
+                setRecentTools(prevTools => prevTools.filter(tool => tool.id !== id));
+            })
+            .catch(err => console.error(err));
+        } else if (actionType === "view") {
+            fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${id}`)
+            .then((response) => response.json()) 
+            .then((data) => {
+                setModalContent(data);
+                handleModal(true);
+                setModalAction(actionType);
+            })
+            .catch(err => console.error(err));
+        } else if (actionType === "edit") {
+            fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${id}`)
+            .then((response) => response.json()) 
+            .then((data) => {
+                setModalContent(data);
+                handleModal(true);
+                setModalAction(actionType);
+            })
+            .catch(err => console.error(err));
+        } else {
+            console.log(actionType, id);
+        }
+    }
     return (
         <div className="border border-solid border-[#191919] p-6 rounded-xl  overflow-x-auto">
             <h2 className="text-lg font-medium">Tools</h2>
             <div className="p-3">
-                <ToolsFilters filterChange={filterChange} filters={filters} />
+                <Modals modal={modal} modalContent={modalContent} onModalChange={handleModal} modalAction={modalAction} /> 
+            </div>
+            <div className="p-3">
+                <ToolsFilters filterChange={filterChange} filters={filters} />    
             </div>
             <table className="w-full border-collapse text-center"> 
                 <thead>
@@ -71,7 +112,7 @@ function ToolsTable({tools, filterChange, search}) {
                                     { tool.updated_at? format(new Date(tool.updated_at), "dd/MM/yyyy HH:mm") : "—" } 
                                 </td>
                                 <td className="p-3">
-                                    <select className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => action(tool.id, e.target.value)}>
+                                    <select className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => handleAction(tool.id, e.target.value)}>
                                         <option value="">Action</option>
                                         <option value="view">View</option>
                                         <option value="edit">Edit</option>

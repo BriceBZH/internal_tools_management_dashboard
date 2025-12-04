@@ -20,7 +20,19 @@ function RecentTools({search}) {
         unused: "bg-red-500",
         expiring: "bg-orange-300"
     };
-    console.log(search)
+    function handleAction(id, actionType) {
+        if (actionType === "delete") {
+            fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${id}`, {
+                method: "DELETE",
+            })
+            .then(() => {
+                setRecentTools(prevTools => prevTools.filter(tool => tool.id !== id));
+            })
+            .catch(err => console.error(err));
+        } else {
+            console.log(actionType, id);
+        }
+    }
     return (
         <div className="border border-solid border-[#191919] p-6 rounded-xl overflow-x-auto">
             <h2 className="text-lg font-medium">Recent Tools</h2>
@@ -62,7 +74,7 @@ function RecentTools({search}) {
                                     </span>
                                 </td>
                                 <td className="p-3">
-                                    <select className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => action(tool.id, e.target.value)}>
+                                    <select className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => handleAction(tool.id, e.target.value)}>
                                         <option value="">Action</option>
                                         <option value="view">View</option>
                                         <option value="edit">Edit</option>
