@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import Modals from '../components/Modals'
 
-function RecentTools({search}) {
+function RecentTools({search, handleAction, modalAction, setModalAction, modalContent, handleModal, modal, setModal, handleContentModal}) {
     const [recentTools, setRecentTools] = useState([]);
     const [sortColumn, setSortColumn] = useState('updated_at');
     const [sortOrder, setSortOrder] = useState('desc');
@@ -20,22 +21,12 @@ function RecentTools({search}) {
         unused: "bg-red-500",
         expiring: "bg-orange-300"
     };
-    function handleAction(id, actionType) {
-        if (actionType === "delete") {
-            fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${id}`, {
-                method: "DELETE",
-            })
-            .then(() => {
-                setRecentTools(prevTools => prevTools.filter(tool => tool.id !== id));
-            })
-            .catch(err => console.error(err));
-        } else {
-            console.log(actionType, id);
-        }
-    }
     return (
         <div className="border border-solid border-[#191919] p-6 rounded-xl overflow-x-auto">
             <h2 className="text-lg font-medium">Recent Tools</h2>
+            <div className="p-3">
+                <Modals modal={modal} modalContent={modalContent} onModalChange={handleModal} modalAction={modalAction} handleContentModal={handleContentModal} setModalAction={setModalAction}/> 
+            </div>
             <table className="w-full border-collapse  text-center"> 
                 <thead>
                     <tr className="border-b border-[#191919]">
@@ -76,9 +67,9 @@ function RecentTools({search}) {
                                 <td className="p-3">
                                     <select className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => handleAction(tool.id, e.target.value)}>
                                         <option value="">Action</option>
-                                        <option value="view">View</option>
-                                        <option value="edit">Edit</option>
-                                        <option value="delete">Delete</option>
+                                        <option value="View">View</option>
+                                        <option value="Edit">Edit</option>
+                                        <option value="Delete">Delete</option>
                                     </select>
                                 </td>
                             </tr>
