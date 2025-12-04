@@ -22,8 +22,8 @@ function RecentTools({search}) {
     };
     console.log(search)
     return (
-        <div className="border border-solid border-[#191919] p-6 rounded-xl">
-            <h3>Recent Tools</h3>
+        <div className="border border-solid border-[#191919] p-6 rounded-xl overflow-x-auto">
+            <h2 className="text-lg font-medium">Recent Tools</h2>
             <table className="w-full border-collapse  text-center"> 
                 <thead>
                     <tr className="border-b border-[#191919]">

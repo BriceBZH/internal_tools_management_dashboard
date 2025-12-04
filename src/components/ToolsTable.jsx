@@ -25,8 +25,8 @@ function ToolsTable({tools, filterChange, search}) {
         (!search || tool.owner_department.toLowerCase().includes(search.toLowerCase()) || tool.name.toLowerCase().includes(search.toLowerCase()) || tool.description.toLowerCase().includes(search.toLowerCase()) || tool.vendor.toLowerCase().includes(search.toLowerCase()) || tool.category.toLowerCase().includes(search.toLowerCase()))
     )
     return (
-        <div className="border border-solid border-[#191919] p-6 rounded-xl">
-            <h3>Tools</h3>
+        <div className="border border-solid border-[#191919] p-6 rounded-xl  overflow-x-auto">
+            <h2 className="text-lg font-medium">Tools</h2>
             <div className="p-3">
                 <ToolsFilters filterChange={filterChange} filters={filters} />
             </div>
