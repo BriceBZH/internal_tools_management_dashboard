@@ -1,39 +1,39 @@
-import { useEffect, useState } from "react";
+import { TrendingUpDown, Wrench, Users, Building2 } from "lucide-react";
 
 function Kpis() {
-    const [kpis, setKpis] = useState([]);
-    useEffect(() => {
-        fetch("https://tt-jsonserver-01.alt-tools.tech/analytics")
-        .then((response) => response.json())
-        .then((data) => {
-            setKpis(data);
-            // console.log(data); 
-        })
-        .catch((err) => {
-            console.error("Erreur fetching Recent tools:", err);   
-        });
-    }, []);
     return (
-        <ul className="flex flex-row gap-3 mb-6 mt-6 w-full">
-            <li className="flex-1  border rounded-xl border-solid border-[#191919] p-3 min-h-30">
-                <h3 className="text-sm font-medium">Monthly Budget</h3>
-                {/* <p>{kpis.budget_overview.current_month_total}/{kpis.budget_overview.monthly_limit}</p> */}
-                {/* <p>{kpis.kpi_trends.budget_change}</p> */}
+        <ul className="grid gap-3 mb-6 mt-6 w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            <li className="border rounded-xl border-solid border-[#191919] p-5 min-h-30">
+                <div className="flex flex-row justify-between items-center mb-4">
+                    <h3 className="text-sm font-medium">Monthly Budget</h3>
+                    <TrendingUpDown size={24} className="text-white rounded-md bg-green-400" />
+                </div>
+                <p>€28,750/€30k</p>
+                <p className="inline-block py-1 px-1 text-xs rounded-md bg-green-400">+12%</p>
             </li>
-            <li className="flex-1 border rounded-xl border-solid border-[#191919] p-3 min-h-30">
-                <h3 className="text-sm font-medium">Active Tools</h3>
-                <p>plop</p>
-                {/* <p>{kpis.kpi_trends.tools_change}</p> */}
+            <li className="border rounded-xl border-solid border-[#191919] p-5 min-h-30">
+                <div className="flex flex-row justify-between items-center mb-4">
+                    <h3 className="text-sm font-medium">Active Tools</h3>
+                    <Wrench size={24} className="text-white rounded-md bg-blue-500" />
+                </div>
+                <p>147</p>
+                <p className="inline-block py-1 px-1 text-xs rounded-md bg-blue-500">+8</p>
             </li>
-            <li className="flex-1 border rounded-xl border-solid border-[#191919] p-3 min-h-30">
-                <h3 className="text-sm font-medium">Departments</h3>
-                {/* <p>{kpis.}</p> */}
-                {/* <p>{kpis.kpi_trends.departments_change}</p> */}
+            <li className="border rounded-xl border-solid border-[#191919] p-5 min-h-30">
+                <div className="flex flex-row justify-between items-center mb-4">
+                    <h3 className="text-sm font-medium">Departments</h3>
+                    <Building2 size={24} className="text-white rounded-md bg-orange-400" />
+                </div>
+                <p>8</p>
+                <p className="inline-block py-1 px-1 text-xs rounded-md bg-orange-400">+2</p>
             </li>
-            <li className="flex-1 border rounded-xl border-solid border-[#191919] p-3 min-h-30">
-                <h3 className="text-sm font-medium">Cost/User</h3>
-                {/* <p>{kpis.cost_analytics.cost_per_user}</p>
-                <p>{kpis.kpi_trends.cost_per_user_change}</p> */}
+            <li className="border rounded-xl border-solid border-[#191919] p-5 min-h-30">
+                <div className="flex flex-row justify-between items-center mb-4">
+                    <h3 className="text-sm font-medium">Cost/User</h3>
+                    <Users size={24} className="text-white rounded-md bg-red-500" />
+                </div>
+                <p>€156</p>
+                <p className="inline-block py-1 px-1 text-xs rounded-md bg-red-500 mb-0">-12€</p>
             </li>
         </ul>
     )
