@@ -6,6 +6,7 @@ import { useState } from "react";
 
 function Header({handleSearch}) {
     const [isOpen, setIsOpen] = useState(false);
+    {/* Liste des menus */}
     const menus = [
         { to: "/", label: "Dashboard" },
         { to: "/tools", label: "Tools" },

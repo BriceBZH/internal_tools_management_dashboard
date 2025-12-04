@@ -7,19 +7,16 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 function CostAnalytics() {
     const [tools, setTools] = useState([]);
     const [chartData, setChartData] = useState(null);
-
     useEffect(() => {
         fetch("https://tt-jsonserver-01.alt-tools.tech/tools")
         .then((response) => response.json())
         .then((data) => {
             setTools(data);
-            console.log(data);
         })
         .catch((err) => {
             console.error("Erreur fetching Tools:", err);   
         });
     }, []);
-
     useEffect(() => {
         if (tools.length > 0) {
             const departments = [...new Set(tools.map(t => t.owner_department))];
@@ -45,7 +42,6 @@ function CostAnalytics() {
             setChartData(data);
         }
     }, [tools]);
-
     return (
         <div className="p-4 border border-[#191919] rounded-xl bg-black">
             <h3 className="text-gray-400 mb-2 text-sm font-medium">Department Cost Breakdown</h3>

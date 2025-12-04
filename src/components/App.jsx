@@ -14,13 +14,17 @@ function App() {
   const [modalAction, setModalAction] = useState();
   const [modalContent, setModalContent] = useState([]);
   const [modal, setModal] = useState(false);
+  const [tools, setTools] = useState([]);
+  {/* On nettoie ce que l'on récupère de la searchBar */}
   function handleSearch(searchValue) {
     const clean = searchValue.replace(/<[^>]*>?/gm, '').trim();
     setSearch(clean);
   }
+  {/* Pour passer la modal d'active à caché */}
   function handleModal(etat) {
       setModal(etat);
   }
+  {/* Pour récupérer les actions faites dans les tableaux */}
   function handleAction(id, actionType) {
       if (actionType === "Delete") {
           fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${id}`, {
@@ -48,10 +52,9 @@ function App() {
               setModalAction(actionType);
           })
           .catch(err => console.error(err));
-      } else {
-          console.log(actionType, id);
       }
   }
+  {/* On récupère les valeurs de la modal pour ajouter/editer un tool */}
   function handleContentModal(e) {
       e.preventDefault();
       setModal(false);
@@ -103,13 +106,12 @@ function App() {
   return (
     <>
       <div className="bg-[#212121] min-h-screen w-full flex justify-center">
-        {/* <div className="bg-black text-white w-[60vw] h-[100vh] p-4"> */}
           <div className="bg-black text-white p-4 max-w-6xl w-full">
           <BrowserRouter>
           <Header handleSearch={handleSearch}/>
             <Routes>
-              <Route path="/" element={<Dashboard search={search} handleAction={handleAction} handleContentModal={handleContentModal} modal={modal} setModal={setModal} modalAction={modalAction} handleModal={handleModal} setModalAction={setModalAction} modalContent={modalContent}/>} />
-              <Route path="/tools" element={<Tools search={search} handleAction={handleAction} handleContentModal={handleContentModal} modal={modal} setModal={setModal} modalAction={modalAction} handleModal={handleModal} setModalAction={setModalAction} modalContent={modalContent}/>} />
+              <Route path="/" element={<Dashboard search={search} tools={tools} setTools={setTools} handleAction={handleAction} handleContentModal={handleContentModal} modal={modal} setModal={setModal} modalAction={modalAction} handleModal={handleModal} setModalAction={setModalAction} modalContent={modalContent}/>} />
+              <Route path="/tools" element={<Tools search={search} tools={tools} handleAction={handleAction} handleContentModal={handleContentModal} modal={modal} setModal={setModal} modalAction={modalAction} handleModal={handleModal} setModalAction={setModalAction} modalContent={modalContent}/>} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/settings" element={<Settings />} />
             </Routes>

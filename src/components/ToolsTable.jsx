@@ -5,20 +5,24 @@ import { useEffect, useState } from "react";
 
 
 function ToolsTable({tools, search, setTools, handleAction, modalAction, setModalAction, modalContent, handleModal, modal, setModal, handleContentModal}) {
+    {/* Les couleurs en fonction du status */}
     const colors = {
         active: "bg-green-400",
         unused: "bg-red-500",
         expiring: "bg-orange-300"
     };
+    {/* Initialisation des filtres */}
     const [filters, setFilters] = useState({
         status: "",
         category: "",
         department: "",
         cost: ""
     });
+    {/* Récupération des filtres */}
     function handleFilterChange(field, value) {
         setFilters(prev => ({ ...prev, [field]: value }));
     }
+    {/* Utilisation des différents filtres + la saisie de la searchBar */}
     const filteredTools = tools.filter(tool =>
         (!filters.category || tool.category === filters.category) &&
         (!filters.status || tool.status === filters.status) &&

@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import Modals from '../components/Modals'
 
-function RecentTools({search, handleAction, modalAction, setModalAction, modalContent, handleModal, modal, setModal, handleContentModal}) {
-    const [recentTools, setRecentTools] = useState([]);
+function RecentTools({search, handleAction, modalAction, setModalAction, modalContent, handleModal, modal, setModal, handleContentModal, setTools, tools}) {
     const [sortColumn, setSortColumn] = useState('updated_at');
     const [sortOrder, setSortOrder] = useState('desc');
+    {/* Récupération des 8 tools les plus récents */}
     useEffect(() => {
         fetch("https://tt-jsonserver-01.alt-tools.tech/tools?_sort=updated_at&_order=desc&_limit=8")
         .then((response) => response.json())
         .then((data) => {
-            setRecentTools(data);
-            console.log(data); 
+            setTools(data);
         })
         .catch((err) => {
             console.error("Erreur fetching Recent tools:", err);   
         });
     }, []);
+    {/* Les couleurs en fonction du status */}
     const colors = {
         active: "bg-green-400",
         unused: "bg-red-500",
@@ -40,7 +40,7 @@ function RecentTools({search, handleAction, modalAction, setModalAction, modalCo
                 </thead>
                 <tbody>
                     {
-                        recentTools
+                        tools
                         .filter(tool => !search || tool.owner_department.toLowerCase().includes(search.toLowerCase()) || tool.name.toLowerCase().includes(search.toLowerCase()))
                         .sort((a, b) => {
                             let valA = a[sortColumn];

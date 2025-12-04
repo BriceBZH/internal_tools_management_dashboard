@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 
 function ToolsFilters({handleFilterChange, filters}) {
     const [departments, setDepartments] = useState([]);
+    {/* Récupération des différents départements */}
     useEffect(() => {
         fetch("https://tt-jsonserver-01.alt-tools.tech/departments")
         .then((response) => response.json())
         .then((data) => {
             setDepartments(data);
-            console.log(data); 
         })
         .catch((err) => {
             console.error("Erreur fetching Departments:", err);   

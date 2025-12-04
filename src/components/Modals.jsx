@@ -7,12 +7,12 @@ function Modals({onModalChange, modal, modalContent, modalAction, handleContentM
         if (modal) setLocalContent(modalContent);
     }, [modal, modalContent]);
     const [departments, setDepartments] = useState([]);
+    {/* Récupération des différents départements */}
     useEffect(() => {
         fetch("https://tt-jsonserver-01.alt-tools.tech/departments")
         .then((response) => response.json())
         .then((data) => {
             setDepartments(data);
-            console.log(data); 
         })
         .catch((err) => {
             console.error("Erreur fetching Departments:", err);   
@@ -30,23 +30,28 @@ function Modals({onModalChange, modal, modalContent, modalAction, handleContentM
             }}>
                 <button onClick={() => onModalChange(false)}>Close</button>
                 <h3 className="text-sm font-medium text-center">{modalAction} Tools</h3>
-                <form className="flex flex-col gap-4" onSubmit={handleContentModal}>   
+                <form className="flex flex-col gap-4" onSubmit={handleContentModal}>
+                    {/* ID */}
                     <div className="flex flex-col">
                         <label htmlFor="id">ID</label>
                         <input type="text" id="id" value={localContent.id} className="border border-[#191919] border-solid p-1 rounded-lg" />
                     </div>
+                    {/* Name */}
                     <div className="flex flex-col">
                         <label htmlFor="name">Name</label>
                         <input type="text" id="name" value={localContent.name} className="border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, name: e.target.value }))}/>
                     </div>
+                    {/* Description */}
                     <div className="flex flex-col">
                         <label htmlFor="description">Description</label>
                         <input type="text" id="description" value={localContent.description} className="border border-[#191919] border-solid p-1 rounded-lg"  onChange={e => setLocalContent(prev => ({ ...prev, description: e.target.description }))}/>
                     </div>
+                    {/* Vendor */}
                     <div className="flex flex-col">
                         <label htmlFor="vendor">Vendor</label>
                         <input type="text" id="vendor" value={localContent.vendor} className="border border-[#191919] border-solid p-1 rounded-lg"  onChange={e => setLocalContent(prev => ({ ...prev, vendor: e.target.value }))}/>
                     </div>
+                    {/* Category */}
                     <div className="flex flex-col">
                         <label htmlFor="category">Category</label>
                         <select id="category" value={localContent.category} className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, category: e.target.value }))}>
@@ -64,15 +69,18 @@ function Modals({onModalChange, modal, modalContent, modalAction, handleContentM
                         </select>
                     </div>
                     <div className="flex flex-row justify-around gap-3">
+                        {/* Monthly Cost */}
                         <div className="flex flex-col w-full">
                             <label htmlFor="monthly_cost">Monthly Cost</label>
                             <input type="text" id="monthly_cost" value={localContent.monthly_cost} className="border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, monthly_cost: e.target.value }))}/>
                         </div>
+                        {/* Previous Month Cost */}
                         <div className="flex flex-col w-full">
                             <label htmlFor="previous_month_cost">Previous Month Cost</label>
                             <input type="text" id="previous_month_cost" value={localContent.previous_month_cost} className="border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, previous_month_cost: e.target.value }))}/>
                         </div>
                     </div>
+                    {/* Department */}
                     <div className="flex flex-col">
                         <label htmlFor="owner_department">Department</label>
                          <select id="owner_department" value={localContent.owner_department} className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, owner_department: e.target.value }))}>
@@ -81,6 +89,7 @@ function Modals({onModalChange, modal, modalContent, modalAction, handleContentM
                             )}
                         </select>
                     </div>
+                    {/* Status */}
                     <div className="flex flex-col">
                         <label htmlFor="status">Status</label>
                         <select id="status" value={localContent.status} className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, status: e.target.value }))}>
@@ -89,15 +98,18 @@ function Modals({onModalChange, modal, modalContent, modalAction, handleContentM
                             <option value ="expiring">expiring</option>
                         </select>
                     </div>
+                    {/* Website URL */}
                     <div className="flex flex-col">
                         <label htmlFor="website_url">Website URL</label>
                         <input type="text" id="website_url" value={localContent.website_url} className="border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, website_url: e.target.value }))}/>
                     </div>
                     <div className="flex flex-row justify-around gap-3">
+                        {/* Active Users Count */}
                         <div className="flex flex-col w-full">
                             <label htmlFor="active_users_count">Active Users Count</label>
                             <input type="text" id="active_users_count" value={localContent.active_users_count} className="border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, active_users_count: e.target.value }))}/>
                         </div>
+                        {/* Icon URL */}
                         <div className="flex flex-col w-full">
                             <label htmlFor="icon_url">Icon URL</label>
                             <input type="text" id="icon_url" value={localContent.icon_url}  className="border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, icon_url: e.target.value }))}/>

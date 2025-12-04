@@ -92,5 +92,6 @@ J'ai utilisé Chart.js pour le seul graphique présent sur l'application.
 ### **🔮 Next Steps / Complete App Vision**
 
 ```bash
-L'ajout de commentaires, car il n\'y en a aucun et ça ne serait pas du luxe. 
+L'ajout de commentaires, car il n\'y en a aucun et ça ne serait pas du luxe.
+Ce qui concerne l\'avatar n'a pas du tout été implémenté (compteur, dropdown menu)
 ```

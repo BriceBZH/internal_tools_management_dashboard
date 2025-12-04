@@ -1,8 +1,8 @@
 import ToolsTable from '../components/ToolsTable'
 import { useEffect, useState } from "react";
 
-function Tools({search, handleAction, modalAction, setModalAction, modalContent, handleModal, modal, setModal, handleContentModal}) {
-    const [tools, setTools] = useState([]);
+function Tools({search, handleAction, modalAction, setModalAction, modalContent, handleModal, modal, setModal, handleContentModal, setTools, tools}) {
+    {/* On récupère tous les tools */}
     useEffect(() => {
         fetch("https://tt-jsonserver-01.alt-tools.tech/tools")
         .then((response) => response.json())

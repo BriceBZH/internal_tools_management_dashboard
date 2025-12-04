@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 
 function Navbar({menus, isOpen}) {
-    console.log(menus)
     return (
         <nav>
             <ul className="flex flex-row hidden md:flex" >
