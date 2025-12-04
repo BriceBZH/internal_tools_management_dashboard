@@ -17,7 +17,7 @@ function Tools({search}) {
         <div className="p-6">
             <h1 className="text-xl font-semibold">Internal Tools Dashboard</h1>
             <p>Monitor and manage your organization's software tools and expenses</p>
-            <ToolsTable tools={tools} search={search} />
+            <ToolsTable tools={tools} search={search} setTools={setTools}/>
         </div>
     )
 }

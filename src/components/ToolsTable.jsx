@@ -3,7 +3,7 @@ import Modals from '../components/Modals'
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 
-function ToolsTable({tools, filterChange, search}) {
+function ToolsTable({tools, filterChange, search, setTools}) {
     const [modal, setModal] = useState(false);
     const [modalAction, setModalAction] = useState();
     const [modalContent, setModalContent] = useState([]);
@@ -37,7 +37,7 @@ function ToolsTable({tools, filterChange, search}) {
                 method: "DELETE",
             })
             .then(() => {
-                setRecentTools(prevTools => prevTools.filter(tool => tool.id !== id));
+                setTools(prevTools => prevTools.filter(tool => tool.id !== id));
             })
             .catch(err => console.error(err));
         } else if (actionType === "View") {
@@ -64,14 +64,58 @@ function ToolsTable({tools, filterChange, search}) {
     }
     function handleContentModal(e) {
         e.preventDefault();
-        console.log(e.target.name.value);
         setModal(false);
+        const idTool = e.target.id.value;
+        const tool = {
+            id: e.target.id.value,
+            name: e.target.name.value,
+            description: e.target.description.value,
+            vendor: e.target.vendor.value,
+            category: e.target.category.value,
+            monthly_cost: e.target.monthly_cost.value,
+            previous_month_cost: e.target.previous_month_cost.value,
+            owner_department: e.target.owner_department.value,
+            status: e.target.status.value,
+            website_url: e.target.website_url.value,
+            active_users_count: e.target.active_users_count.value,
+            icon_url: e.target.icon_url.value, 
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+        };
+        if (modalAction === "Edit") {
+            fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${idTool}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(tool)
+            })
+            .then(res => res.json())
+            .then(updatedTool => {
+                setTools(prevTools => prevTools.map(t => t.id === updatedTool.id ? updatedTool : t));
+            })
+            .catch(err => console.error(err));
+        } else if (modalAction === "Add") {
+            fetch('https://tt-jsonserver-01.alt-tools.tech/tools/', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(tool)
+            })
+            .then(res => res.json())
+            .then(() => {
+                setTools(prevTools => [...prevTools, tool]);
+            })
+            .catch(err => console.error(err));
+        }
+        
     }
     return (
         <div className="border border-solid border-[#191919] p-6 rounded-xl overflow-x-auto">
             <h2 className="text-lg font-medium">Tools</h2>
             <div className="p-3">
-                <Modals modal={modal} modalContent={modalContent} onModalChange={handleModal} modalAction={modalAction} handleContentModal={handleContentModal} /> 
+                <Modals modal={modal} modalContent={modalContent} onModalChange={handleModal} modalAction={modalAction} handleContentModal={handleContentModal} setModalAction={setModalAction}/> 
             </div>
             <div className="p-3">
                 <ToolsFilters filterChange={filterChange} filters={filters} />    

@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import { useEffect, useState } from "react";
 
-function Modals({onModalChange, modal, modalContent, modalAction, handleContentModal}) {
+function Modals({onModalChange, modal, modalContent, modalAction, handleContentModal, setModalAction}) {
     const [localContent, setLocalContent] = useState(modalContent);
     useEffect(() => {
         if (modal) setLocalContent(modalContent);
@@ -20,7 +20,10 @@ function Modals({onModalChange, modal, modalContent, modalAction, handleContentM
     }, []);
     return (
         <div>
-            <button className="border border-[#191919] border-solid p-1 rounded-lg" onClick={() => onModalChange(true)}>Add Tool</button>
+            <button className="border border-[#191919] border-solid p-1 rounded-lg" onClick={() => {
+                onModalChange(true);
+                setModalAction("Add")
+            }}>Add Tool</button>
             <Modal isOpen={modal} appElement={document.getElementById('root')} onRequestClose={() => onModalChange(false)} style={{
                 content: { backgroundColor: "black", color: "white", maxWidth: "50%", margin: "auto", padding: "20px", borderRadius: '12px' },
                 overlay: { backgroundColor: "rgba(0,0,0,0.5)" }
@@ -38,7 +41,7 @@ function Modals({onModalChange, modal, modalContent, modalAction, handleContentM
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="description">Description</label>
-                        <input type="text" id="description" value={localContent.description} className="border border-[#191919] border-solid p-1 rounded-lg"  onChange={e => setLocalContent(prev => ({ ...prev, name: e.target.description }))}/>
+                        <input type="text" id="description" value={localContent.description} className="border border-[#191919] border-solid p-1 rounded-lg"  onChange={e => setLocalContent(prev => ({ ...prev, description: e.target.description }))}/>
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="vendor">Vendor</label>
@@ -71,8 +74,8 @@ function Modals({onModalChange, modal, modalContent, modalAction, handleContentM
                         </div>
                     </div>
                     <div className="flex flex-col">
-                        <label htmlFor="department">Department</label>
-                         <select id="department" value={localContent.owner_department} className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, owner_department: e.target.value }))}>
+                        <label htmlFor="owner_department">Department</label>
+                         <select id="owner_department" value={localContent.owner_department} className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={e => setLocalContent(prev => ({ ...prev, owner_department: e.target.value }))}>
                             {departments.map((department, index) => 
                                 <option key={index} value ={department.name}>{department.name}</option>
                             )}
