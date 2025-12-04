@@ -32,7 +32,7 @@ function ToolsTable({tools, filterChange, search}) {
         setModal(etat);
     }
     function handleAction(id, actionType) {
-        if (actionType === "delete") {
+        if (actionType === "Delete") {
             fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${id}`, {
                 method: "DELETE",
             })
@@ -40,7 +40,7 @@ function ToolsTable({tools, filterChange, search}) {
                 setRecentTools(prevTools => prevTools.filter(tool => tool.id !== id));
             })
             .catch(err => console.error(err));
-        } else if (actionType === "view") {
+        } else if (actionType === "View") {
             fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${id}`)
             .then((response) => response.json()) 
             .then((data) => {
@@ -49,7 +49,7 @@ function ToolsTable({tools, filterChange, search}) {
                 setModalAction(actionType);
             })
             .catch(err => console.error(err));
-        } else if (actionType === "edit") {
+        } else if (actionType === "Edit") {
             fetch(`https://tt-jsonserver-01.alt-tools.tech/tools/${id}`)
             .then((response) => response.json()) 
             .then((data) => {
@@ -62,11 +62,16 @@ function ToolsTable({tools, filterChange, search}) {
             console.log(actionType, id);
         }
     }
+    function handleContentModal(e) {
+        e.preventDefault();
+        console.log(e.target.name.value);
+        setModal(false);
+    }
     return (
-        <div className="border border-solid border-[#191919] p-6 rounded-xl  overflow-x-auto">
+        <div className="border border-solid border-[#191919] p-6 rounded-xl overflow-x-auto">
             <h2 className="text-lg font-medium">Tools</h2>
             <div className="p-3">
-                <Modals modal={modal} modalContent={modalContent} onModalChange={handleModal} modalAction={modalAction} /> 
+                <Modals modal={modal} modalContent={modalContent} onModalChange={handleModal} modalAction={modalAction} handleContentModal={handleContentModal} /> 
             </div>
             <div className="p-3">
                 <ToolsFilters filterChange={filterChange} filters={filters} />    
@@ -114,9 +119,9 @@ function ToolsTable({tools, filterChange, search}) {
                                 <td className="p-3">
                                     <select className="bg-black text-white border border-[#191919] border-solid p-1 rounded-lg" onChange={(e) => handleAction(tool.id, e.target.value)}>
                                         <option value="">Action</option>
-                                        <option value="view">View</option>
-                                        <option value="edit">Edit</option>
-                                        <option value="delete">Delete</option>
+                                        <option value="View">View</option>
+                                        <option value="Edit">Edit</option>
+                                        <option value="Delete">Delete</option>
                                     </select>
                                 </td>
                             </tr>
